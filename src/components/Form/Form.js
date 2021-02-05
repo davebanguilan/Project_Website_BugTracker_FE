@@ -47,7 +47,7 @@ const Form = () => {
                     <TextField
                         {...params}
                         name="members"
-                        variant="standard"
+                        variant="outlined"
                         label="Member"
                         placeholder="Add a member"
                         
