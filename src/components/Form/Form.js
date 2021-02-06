@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
-import {TextField , Button, Typography, Paper } from '@material-ui/core';
+import {useDispatch} from 'react-redux';
+import {TextField , Button, Typography, Paper, Select, InputLabel, MenuItem, FormControl  } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import useStyles from './styles';
+
+import {createBug} from '../../actions/bugs';
 
 const Form = () => {
     const classes = useStyles();
@@ -14,18 +17,22 @@ const Form = () => {
         members: [],
         severity: "",
         status: ""
-    })
+    });
+    const dispatch = useDispatch();
 
     const sampleUsers = [
-        {name: "Dave Banguilan"},
-        {name: "Emiliano Banguilan"},
         {name: "Mickey Mouse"},
         {name: "John Wick"},
         {name: "Tom Kirkman"},
         {name: "Juan Dela Cruz"},
+        
     ];
 
-    const handleSubmit = () => {};
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(bugData);
+        dispatch(createBug(bugData));
+    };
 
     const clear = () => {};
 
@@ -43,22 +50,47 @@ const Form = () => {
                     options={sampleUsers}
                     getOptionLabel={(option) => option.name}
                     fullWidth
+                    onChange={(e, newMember) => setBugData({ ...bugData, members: newMember.map((n) => n.name) })}
+                    getOptionSelected={(option, value) => option.name === value.name}
                     renderInput={(params) => (
                     <TextField
                         {...params}
                         name="members"
                         variant="outlined"
-                        label="Member"
+                        label="Members"
                         placeholder="Add a member"
+                        value={bugData.members}
                         
-                        value={bugData.members} 
-                        onChange={(e) => setBugData({ ...bugData, members: e.target.value})}
                     />
                     )}
                 />
-                {/* <TextField name="members" variant="outlined" label="Members" fullWidth value={bugData.members} onChange={(e) => setBugData({ ...bugData, members: e.target.value})} /> */}
-                <TextField name="severity" variant="outlined" label="Severity" fullWidth value={bugData.severity} onChange={(e) => setBugData({ ...bugData, severity: e.target.value})} />
-                <TextField name="status" variant="outlined" label="Status" fullWidth value={bugData.status} onChange={(e) => setBugData({ ...bugData, status: e.target.value})} />
+                
+               <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                    <InputLabel>Severity</InputLabel>
+                    <Select
+                    name="severity"
+                    label="Severity"
+                    value={bugData.severity}
+                    onChange={(e) => setBugData({ ...bugData, severity: e.target.value})} >
+                        <MenuItem value="Low">Low</MenuItem>
+                        <MenuItem value="Medium">Medium</MenuItem>
+                        <MenuItem value="High">High</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <FormControl fullWidth variant="outlined" className={classes.formControl}>
+                    <InputLabel>Status</InputLabel>
+                    <Select
+                    name="status" 
+                    variant="outlined" 
+                    label="Status"
+                    value={bugData.status}
+                    onChange={(e) => setBugData({ ...bugData, status: e.target.value})} >
+                        <MenuItem value="Pending">Pending</MenuItem>
+                        <MenuItem value="Assigned">Assigned</MenuItem>
+                        <MenuItem value="Completed">Completed</MenuItem>
+                    </Select>
+                </FormControl>
 
                 <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Add Bug</Button>
                 <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>

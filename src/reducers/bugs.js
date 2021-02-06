@@ -5,7 +5,7 @@ export default (bugs = [], action) => {
             return action.payload;
 
         case 'CREATE':
-            return bugs;
+            return [...bugs, action.payload];
     
         default:
             return bugs;
