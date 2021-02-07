@@ -1,4 +1,5 @@
 import React from 'react'
+import {Grid, CircularProgress } from '@material-ui/core'
 import { useSelector } from 'react-redux';
 import Bug from './Bug/Bug';
 
@@ -11,10 +12,15 @@ const Bugs = () => {
     console.log(bugs);
     
     return (
-        <div>
-            Bugs
-            <Bug />
-        </div>
+        !bugs.length ? <CircularProgress /> : (
+            <Grid className={classes.container} container alignItems="stretch" spacing={3}>
+                {bugs.map((bug) => (
+                    <Grid key={bug.id} item xs={12} sm={6}>
+                        <Bug bug={bug} />
+                    </Grid>
+                ))}
+            </Grid>
+        )
     )
 }
 
