@@ -20,3 +20,12 @@ export const createBug = (bug) => async (dispatch) => {
         console.log(error.message);
     }
 }
+
+export const updateBug = (id, bug) => async (dispatch) => {
+    try {
+        const {data} = await api.updateBug(id, bug);
+        dispatch({type: 'UPDATE', payload: data});
+    } catch (error) {
+        console.log(error.message);
+    }
+}

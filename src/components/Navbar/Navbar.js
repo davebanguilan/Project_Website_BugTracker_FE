@@ -47,7 +47,7 @@ const Navbar = () => {
                 </Toolbar>
             </AppBar>
 
-            <Container>
+            <Container >
                 <Grid className={classes.Btn_group} container justify="flex-end" >
                     <Button startIcon={<AddOutlinedIcon />} className={classes.Btn_createBug} variant="contained" component={Link} to="/create">Create Bug</Button>
                     <Button startIcon={<BugReportOutlinedIcon />} className={classes.Btn_Bug} variant="contained" component={Link} to="/">View Bugs</Button>

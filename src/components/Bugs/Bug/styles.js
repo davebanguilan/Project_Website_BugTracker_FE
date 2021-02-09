@@ -20,6 +20,7 @@ export default makeStyles((theme) => ({
         borderRadius: "15px",
         height: "100%",
         position: "relative",
+        opacity: "90%"
     },
     overlay: {
         position: "absolute",
@@ -33,4 +34,7 @@ export default makeStyles((theme) => ({
         right: "15px",
         color: "white",
     },
+    modal: {
+        margin: "30px 0"
+    }
 }));

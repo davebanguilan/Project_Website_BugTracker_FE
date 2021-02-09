@@ -4,12 +4,11 @@ import { useDispatch } from 'react-redux';
 
 import { getBugs } from '../../actions/bugs';
 
-import Form from '../Form/Form';
 import Bugs from '../Bugs/Bugs';
 import useStyles from './styles';
 
 
-const Home = () => {
+const Home = ({currentId}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
 
@@ -29,7 +28,7 @@ const Home = () => {
                         
                     </Grid>
                 </Container>
-            </Grow>
+        </Grow>
     )
 }
 
