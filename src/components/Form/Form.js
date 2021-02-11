@@ -25,14 +25,6 @@ const Form = ({currentId, setCurrentId, handleClose}) => {
     useEffect(() => {
        if(bug) setBugData(bug); 
     }, [bug]);
-    
-    // const sampleUsers = [
-    //     {name: "Mickey Mouse"},
-    //     {name: "John Wick"},
-    //     {name: "Tom Kirkman"},
-    //     {name: "Juan Dela Cruz"},
-        
-    // ];
 
     const sampleUsers = [
         "Mickey Mouse",
@@ -42,21 +34,33 @@ const Form = ({currentId, setCurrentId, handleClose}) => {
         
     ];
 
+    const clear = () => {
+        setCurrentId(0);
+        setBugData({
+            creator: "",
+            title: "",
+            description: "",
+            project: "",
+            members: [],
+            severity: "",
+            status: ""
+        });
+    };
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        if(currentId){
-            dispatch(updateBug(currentId, bugData));
-        } else {
+        if(currentId === 0){
             dispatch(createBug(bugData));
+            clear();
+        } else {
+            dispatch(updateBug(currentId, bugData));
+            clear();
         }
-
         handleClose();
     };
-
-    const clear = () => {};
-
-    console.log(bugData.members);
+    
     return (
         <Grow in>
             <Grid container justify="center" alignItems="stretch" spacing={1}>
@@ -70,12 +74,12 @@ const Form = ({currentId, setCurrentId, handleClose}) => {
                             <TextField name="project" variant="outlined" label="Project" fullWidth value={bugData.project} onChange={(e) => setBugData({ ...bugData, project: e.target.value})} />
                             <Autocomplete
                                 multiple
-                                limitTags={1}
+                                limitTags={3}
                                 value={bugData.members}
                                 options={sampleUsers}
                                 getOptionLabel={(option) => option}
                                 fullWidth
-                                onChange={(e, newMember) => setBugData({ ...bugData, members: newMember.map((n) => n.name) })}
+                                onChange={(e, newMember) => setBugData({ ...bugData, members: newMember })}
                                 getOptionSelected={(option, value) => option === value}
                                 renderInput={(params) => (
                                 <TextField
@@ -117,8 +121,8 @@ const Form = ({currentId, setCurrentId, handleClose}) => {
                                 </Select>
                             </FormControl>
 
-                            <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>{currentId ? "Update Bug" : "Add Bug"}</Button>
-                            <Button variant="contained" color="secondary" size="small" onClick={currentId ? handleClose : clear} fullWidth>{currentId ? "Cancel" : "Clear"}</Button>
+                            <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+                            <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Close</Button>
                             
                         </form>
                     </Paper>

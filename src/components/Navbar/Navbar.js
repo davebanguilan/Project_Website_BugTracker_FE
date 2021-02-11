@@ -47,13 +47,7 @@ const Navbar = () => {
                 </Toolbar>
             </AppBar>
 
-            <Container >
-                <Grid className={classes.Btn_group} container justify="flex-end" >
-                    <Button startIcon={<AddOutlinedIcon />} className={classes.Btn_createBug} variant="contained" component={Link} to="/create">Create Bug</Button>
-                    <Button startIcon={<BugReportOutlinedIcon />} className={classes.Btn_Bug} variant="contained" component={Link} to="/">View Bugs</Button>
-                    <Button startIcon={<DoneOutlineOutlinedIcon />} className={classes.Btn_completed} variant="contained">Completed</Button>
-                </Grid>
-            </Container>
+            
         </>
     )
 }

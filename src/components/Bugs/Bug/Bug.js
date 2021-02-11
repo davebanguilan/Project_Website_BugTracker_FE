@@ -1,25 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from '@material-ui/icons/Edit';
 import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
 import moment from 'moment';
 import useStyles from './styles.js';
-import Modal from '@material-ui/core/Modal';
-import Form from '../../Form/Form.js';
 
-const Bug = ({bug}) => {
+const Bug = ({bug, setCurrentId, handleOpen}) => {
     const classes = useStyles();
-    const [open, setOpen] = useState(false);
-    const [currentId, setCurrentId] = useState(0);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
     
-    const handleClose = () => {
-        setOpen(false);
-    };
 
     return (
         <Card className={classes.card}>
@@ -48,9 +37,7 @@ const Bug = ({bug}) => {
                 }}>
                     <EditIcon fontSize="default" />
                 </Button>
-                <Modal className={classes.modal} open={open} onClose={handleClose}>
-                    <Form currentId={currentId} setCurrentId={setCurrentId} handleClose={handleClose} />
-                </Modal>
+                
             </div>
             <CardContent>
                 <Typography variant="h5" className={classes.creator}>{bug.creator}</Typography>
@@ -68,7 +55,7 @@ const Bug = ({bug}) => {
                 </div>
                 <div className={classes.details}>
                     <Typography variant="h6" color="textSecondary">Description: </Typography>
-                    <Typography variant="h5">{bug.description}</Typography>
+                    <Typography variant="h6">{bug.description}</Typography>
                 </div>
             </CardContent>
             

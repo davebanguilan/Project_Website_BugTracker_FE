@@ -5,7 +5,7 @@ import Bug from './Bug/Bug';
 
 import useStyles from './styles';
 
-const Bugs = () => {
+const Bugs = ({setCurrentId, handleOpen}) => {
     const bugs = useSelector((state) => state.bugs);
     const classes = useStyles();
 
@@ -19,7 +19,7 @@ const Bugs = () => {
             <Grid className={classes.container} container alignItems="stretch" spacing={3}>
                 {bugs.map((bug) => (
                     <Grid key={bug.id} item xs={12} sm={6}>
-                        <Bug bug={bug} />
+                        <Bug bug={bug} setCurrentId={setCurrentId} handleOpen={handleOpen}/>
                     </Grid>
                 ))}
                 <Container className={classes.mainContainer} >
