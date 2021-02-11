@@ -45,10 +45,12 @@ const Form = ({currentId, setCurrentId, handleClose}) => {
             severity: "",
             status: ""
         });
+
+        handleClose();
     };
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         
         if(currentId === 0){
@@ -58,7 +60,6 @@ const Form = ({currentId, setCurrentId, handleClose}) => {
             dispatch(updateBug(currentId, bugData));
             clear();
         }
-        handleClose();
     };
     
     return (

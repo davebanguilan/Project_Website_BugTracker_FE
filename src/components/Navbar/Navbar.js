@@ -1,11 +1,6 @@
 import React from 'react';
-import { AppBar, Typography, Toolbar, Button, Avatar, Grid, Container} from '@material-ui/core';
+import { AppBar, Typography, Toolbar, Button, Avatar } from '@material-ui/core';
 
-import { Link } from "react-router-dom";
-
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import DoneOutlineOutlinedIcon from '@material-ui/icons/DoneOutlineOutlined';
-import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined';
 
 import bug from '../../images/bug.png';
 

@@ -42,6 +42,9 @@ export default makeStyles((theme) => ({
             backgroundColor: deepPurple[400],
             color: '#FFF'
         }
+    },
+    modal: {
+        margin: "35px 0"
     }
     
 }));

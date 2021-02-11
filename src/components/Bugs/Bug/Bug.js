@@ -5,9 +5,13 @@ import EditIcon from '@material-ui/icons/Edit';
 import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
 import moment from 'moment';
 import useStyles from './styles.js';
+import {useDispatch} from 'react-redux';
+
+import { deleteBug } from '../../../actions/bugs';
 
 const Bug = ({bug, setCurrentId, handleOpen}) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     
 
     return (
@@ -60,7 +64,7 @@ const Bug = ({bug, setCurrentId, handleOpen}) => {
             </CardContent>
             
             <CardActions>
-                <Button size="small" color="secondary" onClick={()=>{}}>
+                <Button size="small" color="secondary" onClick={()=> dispatch(deleteBug(bug._id))}>
                     <DeleteIcon />
                     Delete  
                 </Button>
