@@ -1,16 +1,18 @@
+import { FETCH_ALL, CREATE, UPDATE, DELETE } from '../constants/actionTypes'
+
 // eslint-disable-next-line
 export default (bugs = [], action) => {
     switch (action.type) {
-        case 'DELETE':
+        case DELETE:
             return bugs.filter((bug) => bug._id !== action.payload);
     
-        case 'FETCH_ALL':
+        case FETCH_ALL:
             return action.payload;
-
-        case 'CREATE':
+            
+        case CREATE:
             return [...bugs, action.payload];
         
-        case 'UPDATE':
+        case UPDATE:
             return bugs.map((bug) => bug._id === action.payload._id ? action.payload : bug);
 
         default:
