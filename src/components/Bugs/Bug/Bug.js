@@ -46,6 +46,10 @@ const Bug = ({bug, setCurrentId, handleOpen}) => {
             <CardContent>
                 <Typography variant="h5" className={classes.creator}>{bug.creator}</Typography>
                 <div className={classes.details}>
+                    <div>
+                        <Typography display="inline" variant="h6" color="textSecondary">Project: </Typography>
+                        <Typography display="inline" variant="h6" >{bug.project}</Typography>
+                    </div>
                     <Typography variant="h6" color="textSecondary">Members: </Typography>
                     <Typography variant="h6" >{bug.members.map((member, i) => bug.members.length === i + 1 ? `${member}` : `${member}, `)}</Typography>
                     <div>
