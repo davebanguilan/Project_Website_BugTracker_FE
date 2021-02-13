@@ -12,6 +12,10 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         marginBottom: '10px',
     },
+    heading: {
+        color: "rgba(0,0, 0, 1)",
+        textDecoration: "none",
+    },
     brandContainer: {
         display: "flex",
         alignItems: "center",
