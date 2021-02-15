@@ -31,6 +31,7 @@ const Navbar = () => {
     
           if (decodedToken.exp * 1000 < new Date().getTime()) logout();
         }
+        
         setUser(JSON.parse(localStorage.getItem("profile")));
       }, [location]);
 

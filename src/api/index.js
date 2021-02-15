@@ -1,11 +1,28 @@
 import axios from 'axios';
 
-const url = 'http://localhost:5000/bugs';
+const API = axios.create({ baseURL: "http://localhost:5000" });
 
-export const fetchBugs = () => axios.get(url);
+API.interceptors.request.use((req) => {
+    if (localStorage.getItem("profile")) {
+      req.headers.Authorization = `Bearer ${
+        JSON.parse(localStorage.getItem("profile")).token
+      }`;
+    }
+  
+    return req;
+});
 
-export const createBug = (newBug) => axios.post(url, newBug);
+export const fetchBugs = () => API.get('/bugs');
 
-export const updateBug = (id, updatedBug) => axios.patch(`${url}/${id}`, updatedBug);
+export const createBug = (newBug) => API.post('/bugs', newBug);
 
-export const deleteBug = (id) => axios.delete(`${url}/${id}`);
+export const updateBug = (id, updatedBug) => API.patch(`/bugs/${id}`, updatedBug);
+
+export const deleteBug = (id) => API.delete(`/bugs/${id}`);
+
+
+
+//AUTH
+
+export const signIn = (formData) => API.post('/users/signin', formData);
+export const signUp = (formData) => API.post('/users/signup', formData);

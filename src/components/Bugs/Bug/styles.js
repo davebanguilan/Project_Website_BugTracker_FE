@@ -31,7 +31,13 @@ export default makeStyles((theme) => ({
     overlay2: {
         position: "absolute",
         top: "25px",
-        right: "15px",
+        right: "60px",
         color: "white",
     },
+    deleteButton: {
+        position: "absolute",
+        top: "25px",
+        right: "15px",
+        color: "red",
+    }
 }));

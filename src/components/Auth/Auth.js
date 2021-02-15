@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Avatar, Button, Paper, Grid, Typography, Container } from '@material-ui/core';
+import { Avatar, Button, Paper, Grid, Typography, Container, Snackbar } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 import Input from "./Input";
 import Icon from "./Icon";
 
 import useStyles from './styles';
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+
+import { signin, signup } from "../../actions/auth";   
 
 import { GoogleLogin } from "react-google-login";   
 const { REACT_APP_GOOGLEID } = process.env;
@@ -27,10 +30,25 @@ const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
     const history = useHistory();
+    const [open, setOpen] = useState(false);
 
     const handleShowPassword = () => setShowPassword((prevShowPassword) => !prevShowPassword);
 
-    const handleSubmit = () => {};
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (isSignUp) {
+          dispatch(signup(formData, history));
+          setOpen(true);
+        } else {
+          dispatch(signin(formData, history));
+        }
+    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -103,6 +121,11 @@ const Auth = () => {
                     </Grid>
                 </form>
             </Paper>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
+                <Alert variant="filled" onClose={handleClose} severity="success">
+                    Account Created Successfully!
+                </Alert>
+            </Snackbar>
         </Container>
     )
 }

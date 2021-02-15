@@ -12,7 +12,7 @@ import { deleteBug } from '../../../actions/bugs';
 const Bug = ({bug, setCurrentId, handleOpen}) => {
     const classes = useStyles();
     const dispatch = useDispatch();
-    
+    const user = JSON.parse(localStorage.getItem("profile"));
 
     return (
         <Card className={classes.card}>
@@ -34,17 +34,20 @@ const Bug = ({bug, setCurrentId, handleOpen}) => {
 
                 </div>
             </div>
-            <div className={classes.overlay2}>
-                <Button style={{color: 'blue'}} size="small" onClick={() => {
-                    handleOpen();
-                    setCurrentId(bug._id);
-                }}>
-                    <EditIcon fontSize="default" />
-                </Button>
-                
-            </div>
+            {
+                (user?.result.googleId === bug?.creator || user?.result?._id === bug?.creator) &&
+                    <div className={classes.overlay2}>
+                        <Button style={{color: 'blue'}} size="small" onClick={() => {
+                            handleOpen();
+                            setCurrentId(bug._id);
+                        }}>
+                            <EditIcon fontSize="default" />
+                        </Button>
+                        
+                    </div>
+            }
             <CardContent>
-                <Typography variant="h5" className={classes.creator}>{bug.creator}</Typography>
+                <Typography variant="h5" className={classes.creator}>{bug.name}</Typography>
                 <div className={classes.details}>
                     <div>
                         <Typography display="inline" variant="h6" color="textSecondary">Project: </Typography>
@@ -68,10 +71,14 @@ const Bug = ({bug, setCurrentId, handleOpen}) => {
             </CardContent>
             
             <CardActions>
-                <Button size="small" color="secondary" onClick={()=> dispatch(deleteBug(bug._id))}>
-                    <DeleteIcon />
-                    Delete  
-                </Button>
+                {
+                    (user?.result.googleId === bug?.creator ||
+                    user?.result?._id === bug?.creator) &&
+                    <Button className={classes.deleteButton} size="small" color="secondary" onClick={()=> dispatch(deleteBug(bug._id))}>
+                        <DeleteIcon />
+                    </Button>
+                }
+                
             </CardActions>
         </Card>
     )
