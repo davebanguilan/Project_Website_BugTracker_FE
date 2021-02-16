@@ -9,7 +9,7 @@ import Bugs from '../Bugs/Bugs';
 import useStyles from './styles';
 
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import DoneOutlineOutlinedIcon from '@material-ui/icons/DoneOutlineOutlined';
+// import DoneOutlineOutlinedIcon from '@material-ui/icons/DoneOutlineOutlined';
 import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined';
 
 import Modal from '@material-ui/core/Modal';
@@ -68,7 +68,7 @@ const Home = () => {
                     <Grid className={classes.Btn_group} container justify="flex-end" >
                         <Button startIcon={<AddOutlinedIcon />} className={classes.Btn_createBug} variant="contained" onClick={handleOpen}>Create Bug</Button>
                         <Button startIcon={<BugReportOutlinedIcon />} className={classes.Btn_Bug} variant="contained">View Bugs</Button>
-                        <Button startIcon={<DoneOutlineOutlinedIcon />} className={classes.Btn_completed} variant="contained">Completed</Button>
+                        {/* <Button startIcon={<DoneOutlineOutlinedIcon />} className={classes.Btn_completed} variant="contained">Completed</Button> */}
                     </Grid>
                     <Grid container justify="space-between" alignItems="stretch" spacing={3}>
                         <Grid item xs={12}>

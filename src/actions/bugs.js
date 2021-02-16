@@ -15,10 +15,7 @@ export const getBugs = () => async (dispatch) => {
 
 export const createBug = (bug) => async (dispatch) => {
     try {
-        console.log("1");
-        console.log(bug);
         const { data } = await api.createBug(bug);
-        console.log(data);
         dispatch({ type: CREATE, payload: data });
     } catch (error) {
         console.log(error.message);
